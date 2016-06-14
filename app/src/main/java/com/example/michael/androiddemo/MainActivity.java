@@ -3,6 +3,7 @@ package com.example.michael.androiddemo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -40,7 +41,15 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
             final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.thumbnail1);
 //            canvas.clipRect(0, 0, 360, 640);
 //            canvas.drawBitmap(bitmap, new Matrix(), new Paint());
-            canvas.drawBitmap(bitmap, null, new Rect(0, 0, 360, 640), new Paint());
+//            canvas.drawBitmap(bitmap, null, new Rect(0, 0, 360, 640), new Paint());
+            final Paint linePaint = new Paint();
+            linePaint.setColor(Color.WHITE);
+            canvas.drawLine(100, 200, 360, 340, linePaint);
+            final Paint rectPaint = new Paint();
+            rectPaint.setStyle(Paint.Style.FILL);
+            rectPaint.setColor(Color.MAGENTA);
+            rectPaint.setARGB(0Xff, 0X0f, 0Xff, 0Xf0);
+            canvas.drawRect(20, 30, 200, 300, rectPaint);
             canvas.save();
 
 
