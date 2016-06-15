@@ -13,6 +13,12 @@
         android:text="setImageBitmap"
         android:onClick="setImageBitmap" />
 
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:text="beginTrading"
+        android:onClick="beginTrading" />
+
     <TextureView
         android:id="@+id/image_texture"
         android:layout_width="460px"

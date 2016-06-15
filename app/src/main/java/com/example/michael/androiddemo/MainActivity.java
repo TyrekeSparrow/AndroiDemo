@@ -8,15 +8,19 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener {
-    private static final String TAG = "testSurfaceTexture";
+//    private static final String TAG = "testSurfaceTexture";
+    private static final String TAG = "customView";
     private TextureView mTextureView;
     private Surface mSurface;
 
@@ -51,50 +55,8 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
             rectPaint.setARGB(0Xff, 0X0f, 0Xff, 0Xf0);
             canvas.drawRect(20, 30, 200, 300, rectPaint);
             canvas.save();
-
-
-
-
-
-
-
-
-
-
-
-
             mSurface.unlockCanvasAndPost(canvas);
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     @Override
@@ -125,4 +87,33 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
     }
     // ====================================================================================
 
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.i(TAG, "activity dispatchTouchEvent");
+        return super.dispatchTouchEvent(ev);
+    }
+
+
+    public void beginTrading(View view) {
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }

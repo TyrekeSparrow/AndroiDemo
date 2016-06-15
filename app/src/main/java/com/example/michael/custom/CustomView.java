@@ -148,9 +148,22 @@ public class CustomView extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        Log.i(TAG, "dispatchTouchEvent");
+        Log.i(TAG, "custom view dispatchTouchEvent");
         return super.dispatchTouchEvent(event);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
