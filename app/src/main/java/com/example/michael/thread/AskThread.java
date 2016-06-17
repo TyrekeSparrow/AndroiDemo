@@ -17,7 +17,7 @@ public class AskThread extends Thread {
     // ask from 300 to 200
     private static final int MAX_PRICE = 300;
     private static final int MIN_PRICE = 150;
-    private static final int STEP_PRICE = 5;
+    private static final int STEP_PRICE = 15;
     private int currentPrice = MAX_PRICE;
     private Handler handler;
     private BidThread bidThread;
@@ -25,19 +25,32 @@ public class AskThread extends Thread {
 
     @Override
     public void run() {
-        Log.i(TAG, "before ask thread prepare");
+        // Log.i(TAG, "before ask thread prepare");
         Looper.prepare();
-        Log.i(TAG, "after ask thread prepare");
+        // Log.i(TAG, "after ask thread prepare");
 
         instantiateHandler();
-        // thread id, thread name
 
 
+        // ask price
+        askMaxPrice();
         Log.i(TAG, "before ask looper looper = " + Looper.myLooper());
         Looper.loop();
-        // ask price
-//        askMaxPrice();
         Log.i(TAG, "after ask looper looper = " + Looper.myLooper());
+    }
+
+    private void dumpCurrentThreadInfo() {
+        // thread id, thread name
+        final Thread thread = Thread.currentThread();
+        final long  id = thread.getId();
+        final String name = thread.getName();
+        Log.i(TAG, "thread id = " + id);
+        Log.i(TAG, "thread name = " + name);
+
+
+
+
+
     }
 
     private void instantiateHandler() {
@@ -55,6 +68,11 @@ public class AskThread extends Thread {
     private void handleBidMessage(Message msg) {
         // parse bid msg
         final int bidPrice = msg.arg2;
+        if (bidPrice == currentPrice) {
+            askPrice(bidPrice, bidPrice);
+            Log.i(TAG, "ask thread done at price = " + bidPrice);
+            return;
+        }
 //        Log.i(TAG, DateUtil.getDateLabel() + " --------- ask thread handle bid price = " + bidPrice);
         // compute ask price
         final int askPrice = getAskPrice(bidPrice);
@@ -64,7 +82,7 @@ public class AskThread extends Thread {
 
     private int getAskPrice(int bidPrice) {
         // think over a while
-        ThreadUtil.sleepWhile(3000);
+        ThreadUtil.sleepWhile(2000);
         // if bid >= min, return bid
         // if bid < min, try to decrease current price
         // if current price < min, current price = min

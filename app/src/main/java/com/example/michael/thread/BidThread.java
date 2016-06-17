@@ -43,6 +43,12 @@ public class BidThread extends Thread {
     private void handleAskMessage(Message msg) {
         // parse ask price
         final int askPrice = msg.arg2;
+        if (askPrice == currentPrice) {
+            Log.i(TAG, "bid thread done at price = " + askPrice);
+
+            bidPrice(askPrice, askPrice);
+            return;
+        }
 //        Log.i(TAG, DateUtil.getDateLabel() + " bid thread handle ask price = " + askPrice);
         // compute bid price
         final int bidPrice = getBidPrice(askPrice);
@@ -52,7 +58,7 @@ public class BidThread extends Thread {
 
     private int getBidPrice(int askPrice) {
         // think over a while
-        ThreadUtil.sleepWhile(3000);
+        ThreadUtil.sleepWhile(2000);
         if (askPrice <= MAX_PRICE) {
             return askPrice;
         } else {
