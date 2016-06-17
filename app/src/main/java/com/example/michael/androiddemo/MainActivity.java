@@ -1,27 +1,23 @@
 package com.example.michael.androiddemo;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 
+import com.example.michael.thread.AskThread;
+import com.example.michael.thread.BidThread;
+
 public class MainActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener {
 //    private static final String TAG = "testSurfaceTexture";
     private static final String TAG = "customView";
-    private TextureView mTextureView;
     private Surface mSurface;
 
 
@@ -33,8 +29,10 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
     }
 
     private void initViews() {
-        mTextureView = (TextureView) findViewById(R.id.image_texture);
-        mTextureView.setSurfaceTextureListener(this);
+        TextureView textureView = (TextureView) findViewById(R.id.image_texture);
+        if (textureView != null) {
+            textureView.setSurfaceTextureListener(this);
+        }
     }
 
     public void setImageBitmap(View view) {
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         if (mSurface != null) {
             final Canvas canvas = mSurface.lockCanvas(null);
             // draw bitmap
-            final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.thumbnail1);
+//            final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.thumbnail1);
 //            canvas.clipRect(0, 0, 360, 640);
 //            canvas.drawBitmap(bitmap, new Matrix(), new Paint());
 //            canvas.drawBitmap(bitmap, null, new Rect(0, 0, 360, 640), new Paint());
@@ -96,16 +94,32 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
 
 
     public void beginTrading(View view) {
-        
+        trade();
 
+    }
 
+    private void trade() {
+        // ask bid
+        // communicate by handler
+        // handler instance in run method
+        // handler construct by looper
+        // looper get in thread
 
+        // instantiate sell thread
+        // instantiate buy thread
+        // set communicate handler
+        // when receive a message
+        // think over a little time reply message
 
-
-
-
-
-
+        // start ask thread
+        final AskThread askThread = new AskThread();
+        askThread.start();
+        // start bid thread
+        final BidThread bidThread = new BidThread();
+        bidThread.start();
+        // set reply thread
+        askThread.setBidThread(bidThread);
+        bidThread.setAskThread(askThread);
 
 
 
